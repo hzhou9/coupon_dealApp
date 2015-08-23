@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin>
+
+  <name>My Plugin Demo</name>
+  <image>icon.png</image>
+  <main_file>main.php</main_file>
+  <options_file>options.php</options_file>
+  <description>Demo for CouponCMS Plugin.</description>
+  <menu_ready>true</menu_ready>
+  <menu>true</menu>
+
+  <extend>
+  <menu_add>
+  <title>Submenu1</title>
+  <url>MyPluginDemo/main.php&amp;action=demo_action_submenu1</url>
+  </menu_add>
+  <menu_add>
+  <title>Settings</title>
+  <url>MyPluginDemo/options.php</url>
+  </menu_add>
+  </extend>
+
+  <min_version>2</min_version>
+
+  <uninstall>
+  <delete>
+  <options>mpd_param1,mpd_param2</options>
+  </delete>
+  </uninstall>
+
+  <db_query>
+  <![CDATA[
+    INSERT INTO `{DB_PREFIX}options` (option_name, option_value) VALUES ('mpd_param1', 'demo param1')
+  ]]>
+  </db_query>
+
+  <db_query>
+  <![CDATA[
+    INSERT INTO `{DB_PREFIX}options` (option_name, option_value) VALUES ('mpd_param2', 'demo param2')
+  ]]>
+  </db_query>
+
+</plugin>

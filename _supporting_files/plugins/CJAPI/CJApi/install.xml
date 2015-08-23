@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin>
+
+  <name>CJ Api</name>
+  <image>icon.png</image>
+  <main_file>main.php</main_file>
+  <options_file>options.php</options_file>
+  <description>APIs for CJ.com Affiliate Marketing.</description>
+  <menu_ready>true</menu_ready>
+  <menu>true</menu>
+
+  <extend>
+  <menu_add>
+  <title>Advertisers</title>
+  <url>CJApi/cj.php&amp;action=lists</url>
+  </menu_add>
+  <menu_add>
+  <title>Links</title>
+  <url>CJApi/cj.php&amp;action=links</url>
+  </menu_add>
+  <menu_add>
+  <title>Sales</title>
+  <url>CJApi/main.php&amp;action=sales</url>
+  </menu_add>
+  <menu_add>
+  <title>Settings</title>
+  <url>CJApi/options.php</url>
+  </menu_add>
+  </extend>
+
+  <min_version>2</min_version>
+
+  <uninstall>
+  <delete>
+  <columns>cjID/{DB_PREFIX}stores,cjID/{DB_PREFIX}coupons</columns>
+  <options>cj_key,cj_site-id,cj_ipp,cj_exp</options>
+  </delete>
+  </uninstall>
+
+  <db_query>
+  <![CDATA[
+    INSERT INTO `{DB_PREFIX}options` (option_name, option_value) VALUES ('cj_key', '')
+  ]]>
+  </db_query>
+
+  <db_query>
+  <![CDATA[
+    INSERT INTO `{DB_PREFIX}options` (option_name, option_value) VALUES ('cj_site-id', '')
+  ]]>
+  </db_query>
+
+  <db_query>
+  <![CDATA[
+    INSERT INTO `{DB_PREFIX}options` (option_name, option_value) VALUES ('cj_ipp', 10)
+  ]]>
+  </db_query>
+
+  <db_query>
+  <![CDATA[
+    INSERT INTO `{DB_PREFIX}options` (option_name, option_value) VALUES ('cj_exp', 60)
+  ]]>
+  </db_query>
+
+  <db_query>
+  <![CDATA[
+    ALTER TABLE `{DB_PREFIX}stores` ADD `cjID` INT(10) NOT NULL DEFAULT '0' AFTER `feedID`
+  ]]>
+  </db_query>
+
+  <db_query>
+  <![CDATA[
+    ALTER TABLE `{DB_PREFIX}coupons` ADD `cjID` INT(10) NOT NULL DEFAULT '0' AFTER `feedID`
+  ]]>
+  </db_query>
+
+</plugin>

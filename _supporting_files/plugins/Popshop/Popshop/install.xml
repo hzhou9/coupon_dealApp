@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin>
+
+  <name>Popshop</name>
+  <image>icon.png</image>
+  <main_file>main.php</main_file>
+  <options_file>options.php</options_file>
+  <description>Popshop API Plugin.</description>
+  <menu_ready>true</menu_ready>
+  <menu>true</menu>
+
+  <extend>
+  <menu_add>
+  <title>Stores</title>
+  <url>Popshop/main.php&amp;action=stores</url>
+  </menu_add>
+  <menu_add>
+  <title>Coupons</title>
+  <url>Popshop/main.php&amp;action=coupons</url>
+  </menu_add>
+  <menu_add>
+  <title>Settings</title>
+  <url>Popshop/options.php</url>
+  </menu_add>
+  </extend>
+
+  <min_version>2</min_version>
+
+  <uninstall>
+  <delete>
+  <options>popshop_account,popshop_catalog,popshop_lastupdate</options>
+  <columns>popshopID/{DB_PREFIX}stores,popshopID/{DB_PREFIX}coupons</columns>
+  </delete>
+  </uninstall>
+
+  <db_query>
+  <![CDATA[
+    INSERT INTO `{DB_PREFIX}options` (option_name, option_value) VALUES ('popshop_account', '')
+  ]]>
+  </db_query>
+
+  <db_query>
+  <![CDATA[
+    INSERT INTO `{DB_PREFIX}options` (option_name, option_value) VALUES ('popshop_catalog', '')
+  ]]>
+  </db_query>
+  
+  <db_query>
+  <![CDATA[
+    INSERT INTO `{DB_PREFIX}options` (option_name, option_value) VALUES ('popshop_lastupdate', '')
+  ]]>
+  </db_query>
+  
+  <db_query>
+      <![CDATA[
+          ALTER TABLE `{DB_PREFIX}stores` ADD `popshopID` INT(10) NOT NULL DEFAULT '0' AFTER `feedID`
+      ]]>
+  </db_query>
+  
+  <db_query>
+      <![CDATA[
+          ALTER TABLE `{DB_PREFIX}coupons` ADD `popshopID` INT(10) NOT NULL DEFAULT '0' AFTER `feedID`
+      ]]>
+  </db_query>
+
+</plugin>
