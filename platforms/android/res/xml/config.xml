@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.freeelement.shopApp" version="0.1.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <preference name="loglevel" value="DEBUG" />
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.dudu.gexin.Device" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" />
+    </feature>
+    <feature name="FlurryPlugin">
+        <param name="android-package" value="com.phonegap.plugins.flurry.Flurry" />
+    </feature>
+    <name>Deals+Coupons</name>
+    <description>Where you save everyday!</description>
+    <author email="admin@mystore365.mobi" href="http://mystore365.mobi">
+        MysSore365@2015
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <access launch-external="yes" origin="tel:*" />
+    <preference name="Orientation" value="portrait" />
+</widget>

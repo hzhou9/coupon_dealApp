@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+            <title>Title</title>
+            <script>
+                /**
+                 * Created by Common on 14-9-12.
+                 */
+            var deviceAgent = navigator.userAgent.toLowerCase();
+            var agentID = deviceAgent.match(/(iphone|ipod|ipad|android)/) || '';
+            var mobile = {
+                iphone:agentID.indexOf("iphone")>=0
+                ,android:agentID.indexOf("android")>=0
+                ,ipad:agentID.indexOf("ipad")>=0
+                ,ipad:agentID.indexOf("ipod")>=0
+            }
+            if(mobile.iphone){
+                //alert('iphone');
+                document.write('<meta name="viewport" content="width=device-width, initial-scale=01, user-scalable=0,minimal-ui">');
+            }else if(mobile.android){
+                //alert('android');
+                document.write('<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">');
+                //document.write('<meta name="viewport" content="target-densitydpi=device-dpi">');
+            }else{
+                //alert('other');
+                document.write('<meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=0,minimal-ui">');
+            }
+            </script>
+            <meta name="apple-mobile-web-app-capable" content="yes">
+                <meta name="apple-mobile-web-app-status-bar-style" content="black">
+                    
+                    <link rel="stylesheet" href="./css/mui.min.css">
+                    <link rel="stylesheet" href="./css/style.css">
+                        <!--<script src="./js/mui.min.js"></script>-->
+                        <!--<script src="./js/app.js"></script>-->
+                        <style>
+                            html,body {
+                                background-color: #efeff4;
+                                height: 100%;
+                            }
+                        .contaion{
+                            display: box;
+                            display: -webkit-box;
+                            display: -moz-box;
+                            -moz-box-orient: vertical;
+                            -webkit-box-orient: vertical;
+                            box-orient: vertical;
+                            width: 100%;
+                            height: 100%;
+                            position: fixed;
+                            left: 0;
+                            top: 0;
+                        }
+                        .contaion>.mui-bar{
+                            width: 100%;
+                            height: 50px;
+                            /*-moz-box-flex: 1;*/
+                            /*-webkit-box-flex: 1;*/
+                            /*box-flex: 1;*/
+                            position: relative;
+                            overflow: hidden;
+                        }
+                        .contaion>*{
+                            width: 100%;
+                            -moz-box-flex: auto;
+                            -webkit-flex: auto;
+                            -ms-flex: auto;
+                            flex: auto;
+                            height: auto;
+                        }
+                        .scroll-wrapper {
+                            -webkit-overflow-scrolling: touch;
+                            overflow-y: scroll;
+                            
+                            /* important:  dimensions or positioning here! */
+                            position: fixed;
+                            right: 0;
+                            bottom: 0;
+                            left: 0;
+                            top: 0;
+                        }
+                        
+                        .scroll-wrapper iframe {
+                            /* nada! */
+                            height: 100%;
+                            width: 100%;
+                        }
+                        .startpage {
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            left: 0;
+                            top: 0;
+                            font-size: 48px;
+                            text-align: center;
+                            z-index: 999;
+                            background: #1e88e5 url(./img/logo@2x.png) no-repeat center;
+                            background-size: 150px 250px;
+                            font-size: 0;
+                        }
+                        .mui-bar-footer {
+                            color:#98cfff;
+                        }
+                        .tips-loading {background:rgba(0,0,0,.5) url(./img/loading.gif) no-repeat center; background-size:64px 64px; width:120px; height:100px; border-radius:6px; position:absolute; top:75%; left:50%; margin-top:-50px; margin-left:-60px; z-index:1000;}
+                        </style>
+                        </head>
+    
+    <body class="contaion">
+        <div class="scroll-wrapper">
+            <iframe id="iframe1" frameborder="no" border="0" marginwidth="0" marginheight="0" src=""></iframe>
+        </div>
+        <div id="startpage" class="startpage">
+            Title Here
+            <p class="mui-bar-footer">duduche.me</p>
+        </div>
+        <div id="loading" class="tips-loading"></div>
+    </body>
+    <script src="./js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script>
+        window.cordova_onDeviceReady = false;       //是否执行了cordova准备事件
+        var app = {
+            // Application Constructor
+            initialize: function() {
+                this.bindEvents();
+            },
+            // Bind Event Listeners
+            //
+            // Bind any events that are required on startup. Common events are:
+            // 'load', 'deviceready', 'offline', and 'online'.
+            bindEvents: function() {
+                var me = this;
+                document.addEventListener('deviceready', function(){
+                                          me.onDeviceReady();
+                                          }, false);
+            },
+            // deviceready Event Handler
+            //
+            // The scope of 'this' is the event. In order to call the 'receivedEvent'
+            // function, we must explicitly call 'app.receivedEvent(...);'
+            onDeviceReady: function() {
+                console.log('onDeviceReady');
+                //初始化device
+                device.onPushID = app.onPushID;
+                device.onMsgData = app.onMsgData;
+                
+                //navigator.geolocation.getCurrentPosition(onSuccess, onError);
+                this.onMyEVENT();
+                
+                //app.receivedEvent('deviceready');
+            }
+            ,onMyEVENT:function(){
+                window.cordova_onDeviceReady = true;        //准备完毕
+            }
+            ,onPushID: function(data) {
+                console.log('app.pushid:'+data);
+                app.pushid = data;
+                window.onPushID && window.onPushID(data);
+            }
+            ,onMsgData: function(data) {
+                console.log('app.onMsgData:'+data);
+                app.msgdata = data;
+                window.onMsgData && window.onMsgData(data);
+            }
+            
+        };
+    
+    app.initialize();
+        </script>
+    <script>
+    var url = 'http://mystore365.mobi/?cordova=1';
+    var iframeError;
+    function error() {
+        $('#startpage p').html('您的网络好像不给力哦～<br>请检查网络状况，然后点击屏幕重新加载');
+        $('#loading').hide();
+        $('#startpage').unbind().click(function(){
+            $('#loading').show();
+            $('#startpage p').html('');
+            $('#startpage').unbind();
+            initload();//retry
+        });
+    }
+    function success() {
+        $('#startpage').hide();
+        $('#loading').hide();
+    }
+    function initload() {
+        $("#iframe1").attr("src", url+'&'+(new Date-0));
+        iframeError = setTimeout(error, 10000);
+    }
+    
+        $(document).ready(function () {
+            $('#iframe1').on('load', (function () {
+                clearTimeout(iframeError);
+                success();
+            }));
+            initload();
+        });
+
+        </script>
+</html>

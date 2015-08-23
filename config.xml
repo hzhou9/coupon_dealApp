@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.freeelement.shopApp" version="0.1.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Deals+Coupons</name>
+    <description>Where you save everyday!</description>
+    <author email="admin@mystore365.mobi" href="http://mystore365.mobi">
+        MysSore365@2015
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <access origin="tel:*" launch-external="yes" />
+    <preference name="Orientation" value="portrait" />
+</widget>
